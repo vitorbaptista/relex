@@ -2,7 +2,7 @@ module Relex
   class Token
     attr_reader :palavras_reservadas, :delimitadores, :operadores_aritmeticos, :identificadores, :strings_numericas, :comando_atribuicao, :operador_relacional
 
-    def initialize(value)
+    def initialize(valor, classificacao)
       self.palavras_reservadas = /program|var|begin|end|integer|if|then|else/
       self.delimitadores = /;|:|,|\(|\)/
       self.operadores_aritmeticos = /\+|\*/
@@ -11,11 +11,12 @@ module Relex
       self.comando_atribuicao = /\:=/
       self.operador_relacional = /=/
 
-      @value = value
+      @valor = valor
+      @classificacao = classificacao
     end
 
     def to_s
-      @value
+      "#{@valor} #{@classificao}"
     end
   end
 end
