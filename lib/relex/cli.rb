@@ -3,24 +3,29 @@ require 'relex/token'
 module Relex
   class CLI
     def self.execute(stdout=STDOUT, stdin=STDIN, arguments=[])
-      numero_da_linha = 0
       comentario = false
       parenteses = 0
       tokens = []
 
       stdin.read.split('\n').each do |linha|
-        numero_da_linha += 1
+        tokens_desta_linha = []
 
-        linha.split.each_char do |caractere|
+        linha.each_char do |caractere|
           next if caractere =~ /:blank:/
           next if comentario
 
-          comentario = true if token =~ /\{/
-          comentario = false if token =~ /\}/
-       end
+          comentario = true if caractere =~ /\{/
+          comentario = false if caractere =~ /\}/
+        end
+
+        tokens << tokens_desta_linha
       end
 
-    puts tokens.inspect
+      tokens.each_with_index { |tokens_da_linha, linha|
+        tokens_da_linha.each { |token|
+          puts "#{token} #{linha + 1}"
+        }
+      }
     end
   end
 end
