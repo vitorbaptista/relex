@@ -2,13 +2,13 @@ require 'relex/token'
 
 module Relex
   class CLI
-    def self.execute(stdout, arguments=[])
+    def self.execute(stdout=STDOUT, stdin=STDIN, arguments=[])
       numero_da_linha = 0
       comentario = false
       parenteses = 0
       tokens = []
 
-      STDIN.read.split('\n').each do |linha|
+      stdin.read.split('\n').each do |linha|
         numero_da_linha += 1
 
         linha.split.each_char do |caractere|

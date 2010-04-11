@@ -7,4 +7,4 @@ require 'rubygems'
 require File.expand_path(File.dirname(__FILE__) + "/../lib/relex")
 require "relex/cli"
 
-Relex::CLI.execute(STDOUT, ARGV)
+Relex::CLI.execute(STDOUT, STDIN, ARGV)
