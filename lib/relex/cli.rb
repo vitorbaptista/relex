@@ -17,17 +17,28 @@ module Relex
           token.gsub!(/\{[^\}]*\}?/, '')
           token.gsub!(/.*\}/, '') if comentario
 
-          if token =~ /;|:|,|\(|\)/
-            parenteses += 1 if token =~ /\(/
-            parenteses -= 1 if token =~ /\)/
+          if token =~ /.*[;:,\(\)].*/
+            case token
+              when /\(/ then
+                parenteses += 1
+                tokens << Relex::Token.new('(', :delimitadores)
+              when /\)/ then
+                parenteses -= 1 if token =~ /\)/
+                tokens << Relex::Token.new(')', :delimitadores)
+              when /;/ then
+                tokens << Relex::Token.new(';', :delimitadores)
+              when /:/ then
+                tokens << Relex::Token.new(':', :delimitadores)
+              when /,/ then
+                tokens << Relex::Token.new(',', :delimitadores)
+            end
             token.gsub!(/;|:|,|\(|\)/, '')
-            tokens << Relex::Token.new(token, :delimitadores)
           end
 
           tokens << case token
               when /[\{\}].*/ then
                 comentario = !comentario
-              when /program|var|begin|end|integer|if|then|else/ then 
+              when /(program|var|begin|end|integer|if|then|else)/ then 
                 Relex::Token.new(token, :palavra_reservada)
               when /\+|\*/
                 Relex::Token.new(token, :operadores_aritmeticos)
@@ -40,7 +51,7 @@ module Relex
               when /=/
                 Relex::Token.new(token, :operador_relacional)
               else
-                "ERRO!"
+                "ERRO! #{token}"
             end
         end
       end
