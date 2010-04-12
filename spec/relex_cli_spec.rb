@@ -7,7 +7,7 @@ describe Relex::CLI, "execute" do
     stdin_io = StringIO.new(input)
     Relex::CLI.execute(stdout_io, stdin_io, [])
     stdout_io.rewind
-    stdout = stdout_io.read
+    stdout_io.read
   end
  
   it "should ignore commentaries" do
@@ -21,7 +21,7 @@ describe Relex::CLI, "execute" do
 
     input_tests.each { |input|
       stdout = run(input)
-      stdout.should =~ /^#{input} Número inteiro \d+$/
+      stdout.should =~ /^#{input} numero_inteiro \d+$/
     }
   end
 end
