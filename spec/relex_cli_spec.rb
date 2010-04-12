@@ -10,11 +10,15 @@ describe Relex::CLI, "execute" do
     stdout_io.read
   end
 
-  def batch_test(input_tests, formatted_expected_output)
+  def batch_test(input_tests, formatted_expected_output, should_be_true=true)
     input_tests.each { |input|
       expected_output = formatted_expected_output.gsub('#value#') { |v| Regexp.escape(input) }
       stdout = run(input)
-      stdout.should =~ Regexp.new("^#{expected_output}$")
+      if should_be_true
+        stdout.should =~ Regexp.new("^#{expected_output}$")
+      else
+        stdout.should_not =~ Regexp.new("^#{expected_output}$")
+      end 
     }
   end
 
