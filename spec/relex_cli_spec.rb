@@ -9,7 +9,15 @@ describe Relex::CLI, "execute" do
     stdout_io.rewind
     stdout_io.read
   end
- 
+
+  def batch_test(input_tests, formatted_expected_output)
+    input_tests.each { |input|
+      expected_output = formatted_expected_output.gsub('#value#', input)
+      stdout = run(input)
+      stdout.should =~ Regexp.new(expected_output)
+    }
+  end
+
   it "should ignore commentaries" do
     input = "{commentarie}"
     stdout = run(input)
