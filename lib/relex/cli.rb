@@ -18,13 +18,15 @@ module Relex
           comentario = true if caractere =~ /\{/
           comentario = false if caractere =~ /\}/
 
-          if !tmp.empty? && (caractere =~ /\s/ || comentario)
-            tokens_desta_linha << classifica_token(tmp)
-            tmp = ''
+          if caractere =~ /\s/ || comentario
+            if !tmp.empty?
+              tokens_desta_linha << classifica_token(tmp)
+              tmp = ''
+            end
+
             next
           end
 
-          next if comentario
           if !(caractere =~ ALFABETO)
             token = Relex::Token.new(caractere, :simbolo_nao_reconhecido)
             tokens_desta_linha << token
