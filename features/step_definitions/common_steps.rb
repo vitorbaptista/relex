@@ -117,11 +117,7 @@ Then /^I should see "([^\"]*)"$/ do |text|
 end
 
 Then /^I should see$/ do |text|
-  puts "output inicio"
-  puts @stdout
   actual_output = File.read(@stdout)
-  puts actual_output
-  puts "output fim"
   actual_output.should contain(text)
 end
 
