@@ -23,6 +23,11 @@ describe Relex::CLI, "execute" do
     batch_test(input_tests, "")
   end
 
+  it "should ignore whitespace" do
+    input_tests = [" ", "\t", "\n"]
+    batch_test(input_tests, "")
+  end
+
   it "should print an error message and exit when a char not in the language's alphabet is found" do
     input_tests = ['á', 'é', 'ç', '"', '@', '#', '@']
     batch_test(input_tests, "#value# simbolo_nao_reconhecido \\d+")
