@@ -24,6 +24,9 @@ module Relex
             next
           end
 
+          next if comentario
+          next if !(caractere =~ ALFABETO)
+
           tmp += caractere if caractere =~ /\d/
         end
 
