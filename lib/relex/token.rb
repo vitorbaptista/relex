@@ -6,7 +6,7 @@ module Relex
     end
 
     def to_s
-      "#{@valor} #{@classificacao}"
+      "#{@valor} #{@classificacao.to_s.gsub(/_/, ' ').capitalize}"
     end
   end
 end
