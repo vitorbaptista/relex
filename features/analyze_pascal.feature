@@ -16,7 +16,7 @@ Feature: Lexical analysis of a subset of Pascal
     """
     Then I should see exactly
     """
-    Program Palavra reservada 1
+    program Palavra reservada 1
     teste Identificador 1
     ; Delimitador 1
     var Palavra reservada 2
