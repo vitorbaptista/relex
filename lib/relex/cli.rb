@@ -2,7 +2,7 @@ require 'relex/token'
 
 module Relex
   class CLI
-    ALFABETO = /[a-z]|[A-Z]|[0-9]|_|:|;|\)|\(|\.|<|>|=|\+|-|\*|\/|\{|\}/
+    ALFABETO = /[a-z]|[A-Z]|[0-9]|_|:|;|,|\)|\(|\.|<|>|=|\+|-|\*|\/|\{|\}/
 
     def self.execute(stdout=STDOUT, stdin=STDIN, arguments=[])
       comentario = false
@@ -20,6 +20,8 @@ module Relex
           comentario = false if caractere =~ /\}/
 
           if caractere =~ /\s/ || comentario
+            tmp += caractere if !(tmp =~ /,/) && (caractere =~ /,/)
+
             if !tmp.empty?
               token = classifica_token(tmp)
               if token
@@ -77,7 +79,7 @@ module Relex
           Relex::Token.new(token, :operador_relacional)
         when /^:=$/
           Relex::Token.new(token, :comando_de_atribuicao)
-        when /^(;|\.|:|\(|\))$/
+        when /^(;|,|\.|:|\(|\))$/
           Relex::Token.new(token, :delimitador)
       end
     end

@@ -69,7 +69,7 @@ describe Relex::CLI, "execute" do
   end
 
   it "should detect delimiters" do
-    input_tests = [';', '.', ':', '(', ')']
+    input_tests = [';', '.', ':', '(', ')', ',']
     batch_test(input_tests, "#value# Delimitador \\d+")
   end
 
