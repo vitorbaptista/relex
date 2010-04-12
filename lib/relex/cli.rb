@@ -13,6 +13,7 @@ module Relex
         tokens_desta_linha = []
         comentario = false
         tmp = ''
+        linha = "#{linha}\n"
 
         linha.each_char do |caractere|
           comentario = true if caractere =~ /\{/
@@ -34,13 +35,7 @@ module Relex
             break
           end
 
-          tmp += caractere
-        end
-
-        if !tmp.empty? && !comentario
-          token = classifica_token(tmp)
-          tokens_desta_linha << token if token
-          tmp = ''
+          tmp += caractere if !comentario
         end
 
         tokens << tokens_desta_linha if tokens_desta_linha
