@@ -19,7 +19,7 @@ describe Relex::CLI, "execute" do
   end
 
   it "should ignore commentaries" do
-    input_tests = ['{commentarie}']
+    input_tests = ['{comment}']
     batch_test(input_tests, "")
   end
 
