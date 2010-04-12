@@ -6,7 +6,7 @@ module Relex
     end
 
     def to_s
-      "#{@valor} #{@classificao}"
+      "#{@valor} #{@classificacao}"
     end
   end
 end
