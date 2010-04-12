@@ -40,11 +40,7 @@ module Relex
             next
           end
 
-          if !(caractere =~ ALFABETO)
-            token = Relex::Token.new(caractere, :simbolo_nao_reconhecido)
-            tokens_desta_linha << token
-            break
-          end
+          break if !(caractere =~ ALFABETO)
 
           tmp += caractere if !comentario
         end
