@@ -55,8 +55,12 @@ describe Relex::CLI, "execute" do
   end
 
   it "should detect identifiers" do
-    input_tests = ['numero', 'a', 'foo5', 'bar32_', 'vida_universo_e_tudo_mais_42']
-    batch_test(input_tests, "#value# identificador \\d+")
+    expected_output = "#value# identificador \\d+"
+    valid_input_tests = ['numero', 'a', 'foo5', 'bar32_', 'vida_universo_e_tudo_mais_42']
+    batch_test(valid_input_tests, expected_output)
+
+    invalid_input_tests = ['5', '_', '5abc', '_foo', 'numero;', ':valor']
+    batch_test(invalid_input_tests, expected_output, false)
   end
 
   it "should detect delimiters" do
