@@ -31,13 +31,14 @@ module Relex
         end
 
         if !tmp.empty? && !comentario
-          tokens_desta_linha << classifica_token(tmp)
+          token = classifica_token(tmp)
+          tokens_desta_linha << token if token
           tmp = ''
         end
 
-        tokens << tokens_desta_linha
+        tokens << tokens_desta_linha if tokens_desta_linha
       end
-      
+ 
       tokens.each_with_index { |tokens_da_linha, linha|
         tokens_da_linha.each { |token|
           stdout.puts "#{token} #{linha + 1}"
