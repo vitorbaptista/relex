@@ -27,7 +27,7 @@ module Relex
           next if comentario
           next if !(caractere =~ ALFABETO)
 
-          tmp += caractere if caractere =~ /\d/
+          tmp += caractere
         end
 
         if !tmp.empty? && !comentario
