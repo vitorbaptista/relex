@@ -43,4 +43,14 @@ describe Relex::CLI, "execute" do
       stdout.should =~ /^#{input} numero_real \d+$/
     }
   end
+
+  it "should detect reserved words" do
+    input_tests = ['program', 'var', 'integer', 'real', 'boolean', 'procedure',
+                   'begin', 'end', 'if', 'then', 'else', 'while', 'do']
+
+    input_tests.each { |input|
+      stdout = run(input)
+      stdout.should =~ /^#{input} palavra_reservada \d+$/
+    }
+  end
 end
