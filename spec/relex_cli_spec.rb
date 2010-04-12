@@ -15,4 +15,13 @@ describe Relex::CLI, "execute" do
     stdout = run(input)
     stdout.should =~ /^$/
   end
+
+  it "should detect positive integers" do
+    input_tests = ['0', '20', '341', '958', '4123', '59583', '758493', '8098376']
+
+    input_tests.each { |input|
+      stdout = run(input)
+      stdout.should =~ /^#{input} Número inteiro \d+$/
+    }
+  end
 end
