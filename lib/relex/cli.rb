@@ -22,8 +22,17 @@ module Relex
           if caractere =~ /\s/ || comentario
             if !tmp.empty?
               token = classifica_token(tmp)
-              tokens_desta_linha << token if token
-              tmp = ''
+              if token
+                tokens_desta_linha << token
+                tmp = ''
+              else
+                token = classifica_token(tmp[0..-2])
+                if token
+                  tokens_desta_linha << token
+                  tmp = tmp[-1..-1]
+                  redo
+                end
+              end
             end
 
             next
