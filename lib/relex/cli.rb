@@ -6,6 +6,8 @@ module Relex
 
     def self.execute(stdout=STDOUT, stdin=STDIN, arguments=[])
       comentario = false
+      token_reconhecido = false
+      aux = 0
       parenteses = 0
       tokens = []
 
@@ -19,24 +21,33 @@ module Relex
           comentario = true if caractere =~ /\{/
           comentario = false if caractere =~ /\}/
 
-          if caractere =~ /\s/ || comentario
-            tmp += caractere if !(tmp =~ /,/) && (caractere =~ /,/)
-
-            if !tmp.empty?
-              token = classifica_token(tmp)
-              if token
-                tokens_desta_linha << token
-                tmp = ''
+          token_reconhecido = classifica_token(tmp) if (!comentario || caractere =~ /\{/)
+          if (!token_reconhecido && !comentario)
+            if (aux == 2 || caractere =~ /\s/)
+              aux = 1
+              token_anterior_reconhecido = classifica_token(tmp[0..-2])
+              if token_anterior_reconhecido
+                tokens_desta_linha << token_anterior_reconhecido
+                puts "anterior #{tmp}"
+                tmp = tmp[-1..-1]
+                aux += 1
+                redo
               else
-                token = classifica_token(tmp[0..-2])
-                if token
-                  tokens_desta_linha << token
-                  tmp = tmp[-1..-1]
+                token_anterior_anterior_reconhecido = classifica_token(tmp[0..-3])
+                if token_anterior_anterior_reconhecido
+                  tokens_desta_linha << token_anterior_anterior_reconhecido
+                  tmp = tmp[-2..-1]
                   redo
                 end
               end
+            else
+              aux += 1
             end
-
+          end
+          
+          if caractere =~ /\s/
+            tokens_desta_linha << token_reconhecido if token_reconhecido
+            tmp = ''
             next
           end
 
