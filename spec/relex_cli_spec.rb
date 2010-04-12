@@ -45,9 +45,33 @@ describe Relex::CLI, "execute" do
     batch_test(input_tests, "^#value# palavra_reservada \\d+$")
   end
 
-    input_tests.each { |input|
-      stdout = run(input)
-      stdout.should =~ /^#{input} palavra_reservada \d+$/
-    }
+  it "should detect identifiers" do
+    input_tests = ['numero', 'a', 'foo5', 'bar32_', 'vida_universo_e_tudo_mais_42']
+    batch_test(input_tests, "^#value# identificador \\d+$")
+  end
+
+  it "should detect delimiters" do
+    input_tests = [';', '.', ':', '(', ')']
+    batch_test(input_tests, "^#value# identificador \\d+$")
+  end
+
+  it "should detect assignment commands" do
+    input_tests = [':=']
+    batch_test(input_tests, "^#value# identificador \\d+$")
+  end
+
+  it "should detect relational operators" do
+    input_tests = ['=', '<', '>', '<=', '>=', '<>']
+    batch_test(input_tests, "^#value# identificador \\d+$")
+  end
+
+  it "should detect additive operators" do
+    input_tests = ['+', '-', 'or']
+    batch_test(input_tests, "^#value# identificador \\d+$")
+  end
+
+  it "should detect multiplicative operators" do
+    input_tests = ['*', '/', 'and']
+    batch_test(input_tests, "^#value# identificador \\d+$")
   end
 end
