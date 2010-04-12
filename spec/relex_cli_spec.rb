@@ -19,42 +19,31 @@ describe Relex::CLI, "execute" do
   end
 
   it "should ignore commentaries" do
-    input = "{commentarie}"
-    stdout = run(input)
-    stdout.should =~ /^$/
+    input_tests = ['{commentarie}']
+    batch_test(input_tests, "")
   end
 
   it "should print an error message and exit when a char not in the language's alphabet is found" do
     input_tests = ['á', 'é', 'ç', '\"', '@', '#', '@']
-
-    input_tests.each { |input|
-      stdout = run(input)
-      stdout.should =~ /^#{input} simbolo_nao_reconhecido \d+$/
-    }
+    batch_test(input_tests, "^#value# simbolo_nao_reconhecido \\d+$")
   end
 
   it "should detect positive integers" do
     input_tests = ['0', '20', '341', '4123', '59583', '758493', '8098376']
-
-    input_tests.each { |input|
-      stdout = run(input)
-      stdout.should =~ /^#{input} numero_inteiro \d+$/
-    }
+    batch_test(input_tests, "^#value# numero_inteiro \\d+$")
   end
 
   it "should detect non-signed real numbers" do
     input_tests = ['0.3', '20.42', '341.253', '4123.4125', '59583.74585',
                    '758493.254896', '8098376.1245389']
-
-    input_tests.each { |input|
-      stdout = run(input)
-      stdout.should =~ /^#{input} numero_real \d+$/
-    }
+    batch_test(input_tests, "^#value# numero_real \\d+$")
   end
 
   it "should detect reserved words" do
     input_tests = ['program', 'var', 'integer', 'real', 'boolean', 'procedure',
                    'begin', 'end', 'if', 'then', 'else', 'while', 'do']
+    batch_test(input_tests, "^#value# palavra_reservada \\d+$")
+  end
 
     input_tests.each { |input|
       stdout = run(input)
