@@ -2,6 +2,8 @@ require 'relex/token'
 
 module Relex
   class CLI
+    ALFABETO = /[a-z]|[A-Z]|[0-9]|_|:|;|\)|\(|\.|<|>|=|\+|-|\*|\//
+
     def self.execute(stdout=STDOUT, stdin=STDIN, arguments=[])
       comentario = false
       parenteses = 0
