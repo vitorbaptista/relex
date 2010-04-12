@@ -1,5 +1,7 @@
 module Relex
   class Token
+    attr_reader :valor, :classificacao
+
     def initialize(valor, classificacao)
       @valor = valor
       @classificacao = classificacao
