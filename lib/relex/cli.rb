@@ -52,7 +52,7 @@ module Relex
 
     def self.classifica_token(token)
       case token
-        when /(program|var|begin|end|integer|if|then|else)/ then 
+        when /program|var|begin|end|integer|real|boolean|procedure|if|then|else|while|do/ then 
           Relex::Token.new(token, :palavra_reservada)
         when /\+|\*/
           Relex::Token.new(token, :operador_aritmeticos)
