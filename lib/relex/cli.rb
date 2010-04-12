@@ -9,7 +9,7 @@ module Relex
       parenteses = 0
       tokens = []
 
-      stdin.read.split('\n').each do |linha|
+      stdin.read.split("\n").each do |linha|
         tokens_desta_linha = []
         comentario = false
         tmp = ''
