@@ -55,6 +55,8 @@ module Relex
           stdout.puts "#{token} #{linha + 1}"
         }
       }
+
+      stdout.puts "Comentário não fechado" if comentario
     end
 
     def self.classifica_token(token)

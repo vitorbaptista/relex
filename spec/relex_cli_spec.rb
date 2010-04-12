@@ -37,6 +37,11 @@ describe Relex::CLI, "execute" do
     batch_test(input_tests, "#value# Simbolo nao reconhecido \\d+")
   end
 
+  it "should print an error message and exit when a commentary is left open" do
+    input_tests = ['{comentário sem fim']
+    batch_test(input_tests, "Comentário não fechado")
+  end
+
   it "should detect positive integers" do
     input_tests = ['0', '20', '341', '4123', '59583', '758493', '8098376']
     batch_test(input_tests, "#value# Numero inteiro \\d+")
