@@ -16,6 +16,15 @@ describe Relex::CLI, "execute" do
     stdout.should =~ /^$/
   end
 
+  it "should print an error message and exit when a char not in the language's alphabet is found" do
+    input_tests = ['á', 'é', 'ç', '\"', '@', '#', '@']
+
+    input_tests.each { |input|
+      stdout = run(input)
+      stdout.should =~ /^#{input} simbolo_nao_reconhecido \d+$/
+    }
+  end
+
   it "should detect positive integers" do
     input_tests = ['0', '20', '341', '4123', '59583', '758493', '8098376']
 
