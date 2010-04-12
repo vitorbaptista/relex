@@ -56,21 +56,21 @@ module Relex
       case token
         when /^(program|var|begin|end|integer|real|boolean|procedure|if|then|else|while|do)$/ then 
           Relex::Token.new(token, :palavra_reservada)
-        when /\+|-|(or)/
+        when /^(\+|-|(or))$/
           Relex::Token.new(token, :operador_aditivo)
-        when /\*|\/|(and)/
+        when /^(\*|\/|(and))$/
           Relex::Token.new(token, :operador_multiplicativo)
-        when /[a-z]+[a-z0-9_]*/
+        when /^[a-z]+[a-z0-9_]*$/
           Relex::Token.new(token, :identificador)
-        when /[0-9]+\.[0-9]+/
+        when /^[0-9]+\.[0-9]+$/
           Relex::Token.new(token, :numero_real)
-        when /[0-9]+/
+        when /^[0-9]+$/
           Relex::Token.new(token, :numero_inteiro)
         when /^(=|<|>|<=|>=|<>)$/
           Relex::Token.new(token, :operador_relacional)
-        when /:=/
+        when /^:=$/
           Relex::Token.new(token, :comando_de_atribuicao)
-        when /;|\.|:|\(|\)/
+        when /^(;|\.|:|\(|\))$/
           Relex::Token.new(token, :delimitador)
       end
     end
