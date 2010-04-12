@@ -24,7 +24,7 @@ describe Relex::CLI, "execute" do
   end
 
   it "should print an error message and exit when a char not in the language's alphabet is found" do
-    input_tests = ['á', 'é', 'ç', '\"', '@', '#', '@']
+    input_tests = ['á', 'é', 'ç', '"', '@', '#', '@']
     batch_test(input_tests, "#value# simbolo_nao_reconhecido \\d+")
   end
 
