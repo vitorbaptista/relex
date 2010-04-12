@@ -14,7 +14,7 @@ Feature: Lexical analysis of a subset of Pascal
       valor1 := 10;
     end.
     """
-    Then I should see exactly
+    Then I should see
     """
     program Palavra reservada 1
     teste Identificador 1
@@ -30,8 +30,8 @@ Feature: Lexical analysis of a subset of Pascal
     ; Delimitador 4
     begin Palavra reservada 5
     valor1 Identificador 6
-    := Delimitador 6
-    10 Número inteiro 6
+    := Comando de atribuicao 6
+    10 Numero inteiro 6
     ; Delimitador 6
     end Palavra reservada 7
     . Delimitador 7
