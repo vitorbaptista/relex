@@ -49,7 +49,7 @@ describe Relex::CLI, "execute" do
 
   it "should detect non-signed real numbers" do
     input_tests = ['0.3', '20.42', '341.253', '4123.4125', '59583.74585',
-                   '758493.254896', '8098376.1245389']
+                   '758493.254896', '8098376.1245389', '10.']
     batch_test(input_tests, "#value# Numero real \\d+")
   end
 

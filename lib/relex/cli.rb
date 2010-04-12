@@ -67,7 +67,7 @@ module Relex
           Relex::Token.new(token, :operador_multiplicativo)
         when /^[a-z]+[a-z0-9_]*$/
           Relex::Token.new(token, :identificador)
-        when /^[0-9]+\.[0-9]+$/
+        when /^[0-9]+\.[0-9]*$/
           Relex::Token.new(token, :numero_real)
         when /^[0-9]+$/
           Relex::Token.new(token, :numero_inteiro)
