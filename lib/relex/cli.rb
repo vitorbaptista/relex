@@ -28,7 +28,6 @@ module Relex
               token_anterior_reconhecido = classifica_token(tmp[0..-2])
               if token_anterior_reconhecido
                 tokens_desta_linha << token_anterior_reconhecido
-                puts "anterior #{tmp}"
                 tmp = tmp[-1..-1]
                 aux += 1
                 redo
